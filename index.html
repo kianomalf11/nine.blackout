@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>WELCOME TO 9B — AI & MANUSIA: KOLABORASI & TANTANGAN</title>
+  <meta name="description" content="Eksplorasi digital futuristik kelas 9B SMP YPVDP Bontang: AI, Etika, Kolaborasi, dan Kenangan Masa Depan.">
+  <meta name="theme-color" content="#02050e">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Ambient Desktop Background -->
+  <div class="desktop-space-canvas" aria-hidden="true">
+    <div class="ambient-nebula-glow"></div>
+  </div>
+
+  <!-- Opening Experience Modal Overlay -->
+  <div id="opening-overlay" class="modal-scrim active" role="dialog" aria-modal="true" aria-label="Layar Pembuka">
+    <div class="modal-sheet" style="text-align:center;">
+      <div class="micro-pill cyan" style="margin-bottom:12px;">SYSTEM INITIALIZING</div>
+      <h1 style="font-family:var(--font-cyber); font-size:1.45rem; font-weight:900; color:#fff; letter-spacing:1.5px; margin-bottom:6px;">
+        WELCOME TO <span style="color:var(--cyan-neon);">9B</span>
+      </h1>
+      <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:18px;">
+        AI & Manusia: Kolaborasi dan Tantangan di Era Digital
+      </p>
+
+      <div style="background:rgba(2,5,14,0.85); border:1px solid rgba(0,240,255,0.2); border-radius:12px; padding:12px; text-align:left; font-family:monospace; font-size:0.72rem; color:#38bdf8; margin-bottom:18px; line-height:1.45;">
+        <div>&gt; KONEKSI: SMP YPVDP BONTANG // 9B</div>
+        <div>&gt; SINKRONISASI 7 BAB EKSPLORASI...</div>
+        <div>&gt; STATUS: SIAP DILUNCURKAN.</div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:6px; overflow:hidden;">
+          <div id="opening-progress-bar" style="width:0%; height:100%; background:linear-gradient(90deg, #0088ff, #00f0ff); transition:width 0.15s ease;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); font-family:var(--font-cyber); margin-top:5px;">
+          <span>MEMUAT MATERI</span>
+          <span id="opening-percent-text">0%</span>
+        </div>
+      </div>
+
+      <button id="btn-start-stream" class="btn-cyber btn-cyber-primary" style="display:none;">
+        MULAI EKSPLORASI
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Desktop Centering Viewport -->
+  <main class="viewport-wrapper">
+
+    <!-- Mandatory Portrait 9:16 Container -->
+    <div class="portrait-container" id="portrait-frame">
+      
+      <!-- Top Scroll Progress Line -->
+      <div id="scroll-progress-line" class="scroll-progress-line"></div>
+
+      <!-- 3D Holographic Wireframe Core Canvas (Scroll Rotated) -->
+      <canvas id="cyber-core-canvas" class="cyber-core-canvas"></canvas>
+
+      <!-- Minimalist Top HUD Bar -->
+      <header class="minimal-hud">
+        <div class="hud-brand" id="hud-brand-home" title="Kembali ke Bagian Atas">
+          <span class="hud-pulse-dot"></span>
+          <div class="hud-brand-text">9B <span>// AI</span></div>
+        </div>
+
+        <div class="hud-center">
+          <span id="hud-chapter-pill" class="hud-center-pill">01 / 07</span>
+        </div>
+
+        <div class="hud-actions">
+          <!-- AI-IQ Meter -->
+          <div id="btn-hud-iq" class="hud-center-pill" style="cursor:pointer; border-color:rgba(0,136,255,0.4); background:rgba(0,136,255,0.12); color:#60a5fa;" title="Lihat Capaian Belajar">
+            IQ <span id="hud-iq-val">20%</span>
+          </div>
+
+          <!-- Sound FX Toggle (Default Muted) -->
+          <button id="btn-toggle-sound" class="hud-btn" title="Audio FX Cyber (Default Senyap)" aria-label="Toggle Audio">
+            <svg id="icon-sound-off" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            <svg id="icon-sound-on" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+          </button>
+
+          <!-- Quick Fact Button -->
+          <button id="btn-quick-fact" class="hud-btn" title="Fakta Menarik AI" aria-label="Quick Fact">
+            <span style="font-family:var(--font-cyber); font-weight:700; font-size:0.75rem;">?</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Continuous Vertical Scroll Stream (Only Scroll Down) -->
+      <div id="vertical-scroll-stream" class="vertical-scroll-stream">
+
+        <!-- ============================================================
+             CHAPTER 01 — WELCOME TO 9B
+             ============================================================ -->
+        <section id="ch-1" class="chapter-section scroll-reveal" data-chapter="1">
+          <div class="chapter-divider">
+            <span class="chapter-number-tag">BAB 01</span>
+            <div class="chapter-divider-line"></div>
+          </div>
+
+          <h2 class="chapter-title">WELCOME TO <span>9B</span></h2>
+          <p class="chapter-desc">AI dan Manusia: Kolaborasi dan Tantangan di Era Digital</p>
+
+          <!-- Hero AI Humanoid Visual -->
+          <div class="hero-portrait-card">
+            <img src="assets/images/hero_ai_humanoid.jpg" alt="Hero AI Humanoid Kelas 9B" class="hero-portrait-img">
+            <div class="hero-gradient-scrim"></div>
+            <div class="hero-floating-meta">
+              <div>
+                <div style="font-family:var(--font-cyber); font-size:0.75rem; color:var(--cyan-neon); font-weight:700;">AI-HUMANOID 9B</div>
+                <div style="font-size:0.68rem; color:var(--text-muted);">SMP YPVDP BONTANG</div>
+              </div>
+              <span class="micro-pill emerald" style="margin:0;">ONLINE</span>
+            </div>
+          </div>
+
+          <!-- Opening Question Card -->
+          <div class="clean-card" style="border-left: 3px solid var(--cyan-neon);">
+            <div class="micro-pill cyan">Pertanyaan Pemantik</div>
+            <p style="font-family:var(--font-heading); font-size:1rem; font-weight:700; color:#fff; line-height:1.45; margin-bottom:8px;">
+              "Apakah kecerdasan buatan akan menjadi sahabat terbaik manusia, atau justru pesaing yang menggeser peran kita?"
+            </p>
+            <p style="font-size:0.8rem; color:var(--text-secondary); line-height:1.5;">
+              Sebagai siswa kelas 9B, kalian hidup di awal peradaban cerdas. Eksplorasi ini dirancang agar kalian menguasai teknologi tanpa kehilangan jati diri dan nilai luhur kemanusiaan.
+            </p>
+          </div>
+
+          <!-- 3 Learning Pillars -->
+          <div class="clean-card">
+            <div class="micro-pill purple">3 Pilar Pembelajaran 9B</div>
+            
+            <div style="display:flex; flex-direction:column; gap:10px; font-size:0.78rem;">
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:var(--cyan-neon); font-family:var(--font-cyber); font-weight:700;">01</span>
+                <div><strong style="color:#fff;">Pahami Hakikat:</strong> Mengenal logika input-proses-output dan sejarah evolusi AI.</div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:var(--cyan-neon); font-family:var(--font-cyber); font-weight:700;">02</span>
+                <div><strong style="color:#fff;">Timbang Dampak:</strong> Merayakan peluang inovasi sekaligus mewaspadai hoaks, deepfake, dan bias.</div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:var(--cyan-neon); font-family:var(--font-cyber); font-weight:700;">03</span>
+                <div><strong style="color:#fff;">Kendalikan Arah:</strong> Menjadi <em>Human-in-the-Loop</em> yang berintegritas dan bermoral tinggi.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="scroll-indicator-cue">
+            <span>GESER KE BAWAH</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             CHAPTER 02 — DISCOVER ARTIFICIAL INTELLIGENCE
+             ============================================================ -->
+        <section id="ch-2" class="chapter-section scroll-reveal" data-chapter="2">
+          <div class="chapter-divider">
+            <span class="chapter-number-tag">BAB 02</span>
+            <div class="chapter-divider-line"></div>
+          </div>
+
+          <h2 class="chapter-title">DISCOVER <span>AI</span></h2>
+          <p class="chapter-desc">Definisi, Mekanisme Logika, dan Jejak Sejarah Kecerdasan Mesin</p>
+
+          <div class="clean-card">
+            <div class="micro-pill cyan">Definisi Ringkas</div>
+            <p style="font-size:0.82rem; color:#cbd5e1; line-height:1.55;">
+              <strong>Kecerdasan Buatan (AI)</strong> adalah rekayasa komputasi yang meniru proses kognitif manusia: menyerap informasi, menemukan korelasi data, dan mengambil keputusan atau menghasilkan karya baru secara terotomatisasi.
+            </p>
+          </div>
+
+          <!-- 3-Step Interactive Flow -->
+          <div class="clean-card">
+            <div class="micro-pill purple">Alur Kerja AI (Sentuh Setiap Tahap)</div>
+            
+            <div class="flow-steps-grid">
+              <div class="flow-step-box active" data-flow="1">
+                <div class="flow-step-num">01</div>
+                <div class="flow-step-title">INPUT</div>
+              </div>
+              <div class="flow-step-box" data-flow="2">
+                <div class="flow-step-num">02</div>
+                <div class="flow-step-title">PROSES</div>
+              </div>
+              <div class="flow-step-box" data-flow="3">
+                <div class="flow-step-num">03</div>
+                <div class="flow-step-title">OUTPUT</div>
+              </div>
+            </div>
+
+            <div id="flow-detail-drawer" class="flow-detail-drawer">
+              <strong style="color:var(--cyan-neon);">TAHAP 01: INPUT (DATA & SENSOR)</strong>
+              <p style="margin-top:3px;">Data mentah (teks buku, foto rontgen, suara) dimasukkan ke komputer. Tanpa data bermutu dari manusia, AI tidak dapat belajar apa pun.</p>
+            </div>
+          </div>
+
+          <!-- History Timeline -->
+          <div class="clean-card">
+            <div class="micro-pill emerald">Jejak Sejarah (Sentuh Tahun)</div>
+            
+            <div class="clean-timeline-row">
+              <div class="timeline-chip active" data-year="1950">
+                <div class="timeline-chip-year">1950</div>
+                <div class="timeline-chip-tag">Turing</div>
+              </div>
+              <div class="timeline-chip" data-year="1956">
+                <div class="timeline-chip-year">1956</div>
+                <div class="timeline-chip-tag">Dartmouth</div>
+              </div>
+              <div class="timeline-chip" data-year="1997">
+                <div class="timeline-chip-year">1997</div>
+                <div class="timeline-chip-tag">Deep Blue</div>
+              </div>
+              <div class="timeline-chip" data-year="2012">
+                <div class="timeline-chip-year">2012</div>
+                <div class="timeline-chip-tag">Deep Learn</div>
+              </div>
+              <div class="timeline-chip" data-year="2022">
+                <div class="timeline-chip-year">2022</div>
+                <div class="timeline-chip-tag">GenAI</div>
+              </div>
+              <div class="timeline-chip" data-year="2026">
+                <div class="timeline-chip-year">2026+</div>
+                <div class="timeline-chip-tag">Agents</div>
+              </div>
+            </div>
+
+            <div id="timeline-detail-box" style="background:rgba(2,5,14,0.7); border-radius:10px; padding:10px; font-size:0.78rem; line-height:1.45;">
+              <strong id="timeline-title-text" style="color:var(--cyan-neon);">1950 — Alan Turing merumuskan Turing Test</strong>
+              <p id="timeline-desc-text" style="color:var(--text-secondary); margin-top:2px;">Menguji apakah mesin dapat menunjukkan perilaku cerdas yang tidak bisa dibedakan dari manusia.</p>
+            </div>
+          </div>
+
+          <!-- Mini Game: AI OR HUMAN? -->
+          <div class="clean-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="micro-pill cyan" style="margin:0;">MINI GAME // AI OR HUMAN?</span>
+              <span id="quiz-score-val" style="font-family:var(--font-cyber); font-size:0.68rem; color:#facc15;">SKOR: 0/5</span>
+            </div>
+
+            <p id="quiz-prompt-text" style="font-family:var(--font-heading); font-size:0.86rem; font-weight:700; color:#fff; margin-top:10px; line-height:1.4;">
+              1. Menganalisis 5.000 foto rontgen paru-paru dalam 10 detik untuk menemukan pola tumor?
+            </p>
+
+            <div class="quiz-options-grid">
+              <button class="btn-quiz-choice" data-ans="AI">SISTEM AI</button>
+              <button class="btn-quiz-choice" data-ans="HUMAN">MANUSIA</button>
+            </div>
+
+            <div id="quiz-feedback-box" style="display:none; margin-top:8px; padding:8px 10px; border-radius:8px; font-size:0.75rem; line-height:1.4;"></div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             CHAPTER 03 — AI IN HUMAN LIFE
+             ============================================================ -->
+        <section id="ch-3" class="chapter-section scroll-reveal" data-chapter="3">
+          <div class="chapter-divider">
+            <span class="chapter-number-tag">BAB 03</span>
+            <div class="chapter-divider-line"></div>
+          </div>
+
+          <h2 class="chapter-title">AI IN <span>HUMAN LIFE</span></h2>
+          <p class="chapter-desc">Transformasi Positif di 4 Sektor Vital Masa Kini</p>
+
+          <!-- Minimal Sectors Tab Bar -->
+          <div class="sectors-tab-bar">
+            <div class="sector-tab-pill active" data-sec="edu">Edukasi</div>
+            <div class="sector-tab-pill" data-sec="health">Kesehatan</div>
+            <div class="sector-tab-pill" data-sec="industry">Industri</div>
+            <div class="sector-tab-pill" data-sec="creative">Kreativitas</div>
+          </div>
+
+          <!-- Dynamic Sector Content Card -->
+          <div class="clean-card" id="sector-display-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h3 id="sector-title" style="font-family:var(--font-heading); font-size:0.95rem; color:#fff;">Pendidikan & Pembelajaran Adaptif</h3>
+              <span id="sector-badge" class="micro-pill emerald" style="margin:0;">ADAPTIVE</span>
+            </div>
+
+            <p id="sector-desc" style="font-size:0.8rem; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+              AI menyesuaikan tempo belajar siswa: mengidentifikasi materi yang belum dikuasai dan menyajikan latihan yang dirancang khusus tanpa menghakimi.
+            </p>
+
+            <div style="background:rgba(0,136,255,0.1); border-left:3px solid var(--blue-electric); padding:8px 10px; border-radius:0 8px 8px 0; font-size:0.75rem; margin-bottom:8px;">
+              <strong style="color:#7dd3fc;">Contoh Nyata:</strong>
+              <div id="sector-example" style="color:#e0f2fe; margin-top:2px;">Platform bimbingan belajar yang memetakan gaya belajar setiap siswa secara presisi.</div>
+            </div>
+
+            <div style="font-size:0.72rem; color:var(--text-muted);">
+              <strong>Dampak Siswa 9B:</strong> <span id="sector-impact">Belajar mandiri menjadi lebih efektif dan terarah 24/7.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             CHAPTER 04 — THE DARK SIDE OF AI
+             ============================================================ -->
+        <section id="ch-4" class="chapter-section scroll-reveal" data-chapter="4">
+          <div class="chapter-divider">
+            <span class="chapter-number-tag" style="border-color:var(--accent-crimson); color:var(--accent-crimson);">BAB 04</span>
+            <div class="chapter-divider-line"></div>
+          </div>
+
+          <h2 class="chapter-title">THE DARK <span>SIDE OF AI</span></h2>
+          <p class="chapter-desc">Privasi, Deepfake, Kemalasan Berpikir, dan Bahaya Ketergantungan</p>
+
+          <!-- Dilemma Simulation Card -->
+          <div class="clean-card" style="border-color:rgba(255,51,102,0.3);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="micro-pill crimson" style="margin:0;">SIMULASI: KASUS NYATA SISWA</span>
+              <span id="risk-status-tag" style="font-family:var(--font-cyber); font-size:0.65rem; color:#facc15;">RISIKO: SEDANG</span>
+            </div>
+
+            <div class="risk-gauge-bar">
+              <div id="risk-gauge-fill" class="risk-gauge-fill"></div>
+            </div>
+
+            <p style="font-size:0.82rem; color:#fff; font-weight:600; margin:8px 0 12px 0; line-height:1.45;">
+              Seseorang menyebarkan video deepfake wajah teman sekelas yang sedang dipermalukan di grup medsos. Apa tindakanmu?
+            </p>
+
+            <div>
+              <button class="dilemma-choice-btn" data-choice="share">A. Ikut tertawa dan membagikannya ke teman lain sebagai lelucon.</button>
+              <button class="dilemma-choice-btn" data-choice="report">B. Menegur di grup, tidak meneruskan video, dan mengingatkan bahaya UU ITE.</button>
+              <button class="dilemma-choice-btn" data-choice="silent">C. Diamkan saja dan pura-pura tidak melihat agar cari aman.</button>
+            </div>
+
+            <div id="dilemma-result-panel" style="display:none; padding:8px 10px; border-radius:8px; font-size:0.75rem; line-height:1.4; margin-top:8px;"></div>
+          </div>
+
+          <!-- 5 Clean Collapsible Threat Cards -->
+          <div class="clean-card">
+            <div class="micro-pill crimson">5 Ancaman Utama AI</div>
+            
+            <div class="clean-accordion-item open">
+              <div class="clean-accordion-head">
+                <span>🛡️ 1. Bocornya Privasi Data</span>
+                <span class="acc-chevron">▲</span>
+              </div>
+              <div class="clean-accordion-body">
+                Data percakapan, foto, dan lokasi yang dimasukkan ke AI dapat disimpan dan digunakan untuk profiling iklan atau disalahgunakan peretas.
+              </div>
+            </div>
+
+            <div class="clean-accordion-item">
+              <div class="clean-accordion-head">
+                <span>🎭 2. Deepfake & Kloning Suara</span>
+                <span class="acc-chevron">▼</span>
+              </div>
+              <div class="clean-accordion-body">
+                Rekayasa video dan audio sangat mirip aslinya untuk memfitnah tokoh atau melakukan penipuan finansial.
+              </div>
+            </div>
+
+            <div class="clean-accordion-item">
+              <div class="clean-accordion-head">
+                <span>🧠 3. Cognitive Outsourcing</span>
+                <span class="acc-chevron">▼</span>
+              </div>
+              <div class="clean-accordion-body">
+                Kebiasaan copy-paste tugas dari AI tanpa membaca membuat daya pikir kritis dan memori otak siswa tumpul.
+              </div>
+            </div>
+
+            <div class="clean-accordion-item">
+              <div class="clean-accordion-head">
+                <span>⚖️ 4. Bias Algoritma & Halusinasi</span>
+                <span class="acc-chevron">▼</span>
+              </div>
+              <div class="clean-accordion-body">
+                AI kerap mengarang fakta yang terdengar meyakinkan padahal keliru, serta membawa prasangka dari data pelatihannya.
+              </div>
+            </div>
+
+            <div class="clean-accordion-item">
+              <div class="clean-accordion-head">
+                <span>💼 5. Disrupsi Pasar Kerja</span>
+                <span class="acc-chevron">▼</span>
+              </div>
+              <div class="clean-accordion-body">
+                Pekerjaan administratif rutin terotomatisasi, menuntut siswa mengasah kemampuan beradaptasi dan karakter unik.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             CHAPTER 05 — AI ETHICS & HUMAN CONTROL
+             ============================================================ -->
+        <section id="ch-5" class="chapter-section scroll-reveal" data-chapter="5">
+          <div class="chapter-divider">
+            <span class="chapter-number-tag" style="border-color:var(--accent-emerald); color:var(--accent-emerald);">BAB 05</span>
+            <div class="chapter-divider-line"></div>
+          </div>
+
+          <h2 class="chapter-title">ETHICS & <span>CONTROL</span></h2>
+          <p class="chapter-desc">Prinsip Human-in-the-Loop & Kejujuran Akademik Generasi 9B</p>
+
+          <!-- Human Controller Simulator -->
+          <div class="clean-card" style="border-color:rgba(16,185,129,0.3);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="micro-pill emerald" style="margin:0;">HUMAN-IN-THE-LOOP CONTROLLER</span>
+              <span id="controller-counter-text" style="font-family:var(--font-cyber); font-size:0.65rem; color:var(--cyan-neon);">KASUS: 1/3</span>
+            </div>
+
+            <p style="font-size:0.75rem; color:var(--text-muted); margin-top:8px;">AI memberi saran di bawah. Sebagai penentu moral manusia, apa keputusanmu?</p>
+
+            <div style="background:rgba(2,5,14,0.8); border:1px dashed rgba(0,240,255,0.3); border-radius:10px; padding:10px; margin:8px 0; font-size:0.8rem;">
+              <span style="color:#38bdf8; font-weight:700;">[REKOMENDASI AI]:</span>
+              <p id="controller-prompt-display" style="color:#e2e8f0; margin-top:3px;">
+                "Menolak beasiswa seorang siswa secara otomatis karena riwayat kode pos alamatnya di daerah ekonomi bawah."
+              </p>
+            </div>
+
+            <div class="decision-triad">
+              <button class="btn-decision" data-dec="terima" style="background:rgba(16,185,129,0.15); border-color:#10b981; color:#6ee7b7;">TERIMA</button>
+              <button class="btn-decision" data-dec="periksa" style="background:rgba(250,204,21,0.15); border-color:#facc15; color:#fef08a;">PERIKSA</button>
+              <button class="btn-decision" data-dec="tolak" style="background:rgba(255,51,102,0.15); border-color:#ff3366; color:#fda4af;">TOLAK</button>
+            </div>
+
+            <div id="controller-feedback-panel" style="display:none; padding:8px 10px; border-radius:8px; font-size:0.75rem; line-height:1.4; margin-top:8px;"></div>
+          </div>
+
+          <!-- Interactive Ethics Checklist -->
+          <div class="clean-card">
+            <div class="micro-pill cyan">Checklist Integritas Digital 9B (Tersimpan)</div>
+            <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Centang komitmen etika kalian:</p>
+
+            <div class="checklist-minimal-row" data-chk="0">
+              <div class="check-box-icon">✓</div>
+              <div style="font-size:0.78rem; line-height:1.4;"><strong style="color:#fff;">Verifikasi Fakta:</strong> Selalu periksa jawaban AI dengan buku teks / rujukan resmi.</div>
+            </div>
+
+            <div class="checklist-minimal-row" data-chk="1">
+              <div class="check-box-icon">✓</div>
+              <div style="font-size:0.78rem; line-height:1.4;"><strong style="color:#fff;">Kejujuran Tugas:</strong> Cantumkan sumber bila memakai AI, jangan menyontek buta.</div>
+            </div>
+
+            <div class="checklist-minimal-row" data-chk="2">
+              <div class="check-box-icon">✓</div>
+              <div style="font-size:0.78rem; line-height:1.4;"><strong style="color:#fff;">Jaga Rahasia:</strong> Tak pernah upload password, NIK, atau rahasia teman ke AI.</div>
+            </div>
+
+            <div class="checklist-minimal-row" data-chk="3">
+              <div class="check-box-icon">✓</div>
+              <div style="font-size:0.78rem; line-height:1.4;"><strong style="color:#fff;">Tolak Deepfake:</strong> Tak menyebarkan konten rekayasa yang merugikan sesama.</div>
+            </div>
+
+            <div class="checklist-minimal-row" data-chk="4">
+              <div class="check-box-icon">✓</div>
+              <div style="font-size:0.78rem; line-height:1.4;"><strong style="color:#fff;">Hati Nurani:</strong> Keputusan etis dan empati mutlak tetap ada di tangan manusia.</div>
+            </div>
+
+            <div id="badge-unlocked-banner" style="display:none; background:rgba(16,185,129,0.15); border:1px solid #10b981; border-radius:10px; padding:10px; text-align:center; margin-top:10px;">
+              <div style="font-size:1.3rem;">🎖️</div>
+              <strong style="color:#6ee7b7; font-family:var(--font-cyber); font-size:0.75rem;">BADGE TERBUKA: 9B DIGITAL CITIZEN</strong>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             CHAPTER 06 — THE FUTURE OF HUMAN & AI
+             ============================================================ -->
+        <section id="ch-6" class="chapter-section scroll-reveal" data-chapter="6">
+          <div class="chapter-divider">
+            <span class="chapter-number-tag" style="border-color:var(--accent-purple); color:var(--accent-purple);">BAB 06</span>
+            <div class="chapter-divider-line"></div>
+          </div>
+
+          <h2 class="chapter-title">THE FUTURE OF <span>US</span></h2>
+          <p class="chapter-desc">Sinergi Harmonis: Kekuatan Kemanusiaan yang Abadi</p>
+
+          <!-- Golden Quote Banner -->
+          <div class="minimal-quote-banner">
+            <div style="font-family:var(--font-cyber); font-size:0.62rem; color:var(--cyan-neon); letter-spacing:1.5px; margin-bottom:4px;">PRINSIP ABADI</div>
+            <p class="quote-hero-text">"AI CAN PROCESS INFORMATION, BUT HUMANS GIVE IT PURPOSE."</p>
+            <p style="font-size:0.75rem; color:var(--text-muted); font-style:italic;">AI mengolah miliaran data, manusia memberi makna dan hati nurani.</p>
+          </div>
+
+          <!-- Build Your Skill Matrix -->
+          <div class="clean-card">
+            <div class="micro-pill purple">Build Your Future Matrix (Pilih Skill Kamu)</div>
+            <p style="font-size:0.75rem; color:var(--text-muted);">Pilih keahlian manusia yang ingin kamu asah untuk bersinergi dengan AI:</p>
+
+            <div class="skills-chips-cloud">
+              <span class="skill-tag-chip selected" data-sk="kreatif">🎨 Kreativitas</span>
+              <span class="skill-tag-chip selected" data-sk="empati">❤️ Empati</span>
+              <span class="skill-tag-chip" data-sk="kritis">🔍 Berpikir Kritis</span>
+              <span class="skill-tag-chip" data-sk="problem">🧩 Problem Solving</span>
+              <span class="skill-tag-chip" data-sk="etik">⚖️ Etika Moral</span>
+              <span class="skill-tag-chip" data-sk="lead">🚀 Kepemimpinan</span>
+            </div>
+
+            <div id="skill-synergy-output" style="background:rgba(2,5,14,0.85); border:1px solid rgba(0,240,255,0.2); border-radius:10px; padding:10px; font-size:0.78rem; line-height:1.45; color:#cbd5e1;">
+              Kombinasi <strong>Kreativitas & Empati</strong> membuatmu menjadi kreator berkarakter yang menyentuh hati sesama manusia, bukan sekadar operator mesin.
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             CHAPTER 07 — OUR MEMORIES: CLASS 9B
+             ============================================================ -->
+        <section id="ch-7" class="chapter-section scroll-reveal" data-chapter="7">
+          <div class="chapter-divider">
+            <span class="chapter-number-tag" style="border-color:var(--cyan-neon); color:var(--cyan-neon);">BAB 07</span>
+            <div class="chapter-divider-line"></div>
+          </div>
+
+          <h2 class="chapter-title">OUR MEMORIES <span>9B</span></h2>
+          <p class="chapter-desc">SMP YPVDP BONTANG — Jejak Langkah, Tawa, dan Kebersamaan Abadi</p>
+
+          <!-- Authentic Photo Card 1 (Lab Komputer) -->
+          <div class="memories-card" data-photo="indoor" title="Sentuh untuk Memperbesar">
+            <div class="memories-img-box">
+              <img src="assets/images/class_9b_indoor.jpg" alt="Foto Bersama Siswa 9B di Lab Komputer" class="memories-img" loading="lazy">
+              <span class="memories-meta-badge">LAB KOMPUTER 9B</span>
+            </div>
+            <div class="memories-info-box">
+              <h3 class="memories-title">Ceria & Kebersamaan di Ruang Belajar</h3>
+              <p class="memories-sub">Potret kehangatan dan kekompakan siswa-siswi Kelas 9B saat belajar bersama di lab komputer. Sentuh untuk memperbesar foto!</p>
+            </div>
+          </div>
+
+          <!-- Authentic Photo Card 2 (Apel SMP YPVDP) -->
+          <div class="memories-card" data-photo="outdoor" title="Sentuh untuk Memperbesar">
+            <div class="memories-img-box">
+              <img src="assets/images/class_9b_outdoor.jpg" alt="Foto Upacara dan Prestasi SMP YPVDP Bontang" class="memories-img" loading="lazy">
+              <span class="memories-meta-badge">SMP YPVDP BONTANG</span>
+            </div>
+            <div class="memories-info-box">
+              <h3 class="memories-title">Generasi Hebat, Berprestasi & Berkarakter</h3>
+              <p class="memories-sub">Momen apel penuh kebanggaan bersama guru tercinta di kampus Yayasan Vidatra SMP YPVDP Bontang.</p>
+            </div>
+          </div>
+
+          <!-- Credible Kompas.com Bibliography -->
+          <div class="clean-card">
+            <div class="micro-pill cyan">Daftar Pustaka Resmi Kompas.com</div>
+
+            <a href="https://tekno.kompas.com/read/2023/04/10/18150047/pengertian-kecerdasan-buatan-cara-kerja-dan-contohnya" target="_blank" rel="noopener noreferrer" class="clean-ref-link">
+              <div class="ref-micro-src">KOMPAS TEKNO // 10 APR 2023</div>
+              <div class="ref-headline">Artificial Intelligence (AI): Pengertian, Perkembangan, Cara Kerja, dan Dampaknya</div>
+              <div class="ref-desc-text">Penjelasan komprehensif definisi, machine learning, dan penerapan AI. ↗</div>
+            </a>
+
+            <a href="https://tekno.kompas.com/read/2023/12/22/19000037/menkominfo-terbitkan-surat-edaran-panduan-etika-ai-ini-isinya" target="_blank" rel="noopener noreferrer" class="clean-ref-link">
+              <div class="ref-micro-src">KOMPAS TEKNO // 22 DES 2023</div>
+              <div class="ref-headline">Menkominfo Terbitkan Surat Edaran Panduan Etika AI, Ini Isinya</div>
+              <div class="ref-desc-text">Surat Edaran No. 9 Tahun 2023 tentang 9 nilai etika dan transparansi AI. ↗</div>
+            </a>
+
+            <a href="https://edukasi.kompas.com/read/2024/11/12/171500771/mapel-coding-dan-ai-akan-diterapkan-mulai-kelas-4-sd" target="_blank" rel="noopener noreferrer" class="clean-ref-link">
+              <div class="ref-micro-src">KOMPAS EDUKASI // 12 NOV 2024</div>
+              <div class="ref-headline">Mapel Coding dan AI Akan Diterapkan Mulai Kelas 4 SD</div>
+              <div class="ref-desc-text">Arah kurikulum nasional membentuk generasi digital citizenship berintegritas. ↗</div>
+            </a>
+
+            <a href="https://tekno.kompas.com/read/2024/05/14/19300097/survei-microsoft-92-persen-karyawan-di-indonesia-pakai-ai-di-tempat-kerja" target="_blank" rel="noopener noreferrer" class="clean-ref-link">
+              <div class="ref-micro-src">KOMPAS TEKNO // 14 MEI 2024</div>
+              <div class="ref-headline">Survei Microsoft: 92% Karyawan di Indonesia Pakai AI di Tempat Kerja</div>
+              <div class="ref-desc-text">Data transformasi dunia kerja dan pentingnya keahlian kolaborasi manusia-AI. ↗</div>
+            </a>
+          </div>
+
+          <!-- Closing Dedication -->
+          <div class="clean-card" style="text-align:center; padding:22px 14px; border-color:var(--cyan-neon); background:radial-gradient(circle at 50% 50%, rgba(0,136,255,0.2) 0%, rgba(3,8,24,0.9) 100%);">
+            <h3 style="font-family:var(--font-cyber); font-size:1.05rem; font-weight:900; color:#fff; letter-spacing:1px; margin-bottom:6px;">
+              THANK YOU, <span>CLASS 9B!</span>
+            </h3>
+            <p style="font-size:0.78rem; color:#cbd5e1; line-height:1.55; margin-bottom:14px;">
+              Kuasai teknologi masa depan dengan cerdas, tetaplah rendah hati, saling menyayangi, dan jadilah penerang peradaban dunia.
+            </p>
+            <button id="btn-open-completion" class="btn-cyber btn-cyber-primary" style="font-size:0.78rem;">
+              LIHAT SERTIFIKAT KELAS 9B 🏆
+            </button>
+          </div>
+        </section>
+
+      </div><!-- /.vertical-scroll-stream -->
+
+      <!-- Floating Back to Top Button -->
+      <button id="btn-back-to-top" class="fab-back-top" title="Kembali ke Atas" aria-label="Back to Top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      </button>
+
+    </div><!-- /.portrait-container -->
+  </main>
+
+  <!-- ============================================================
+       MODAL 1: PHOTO LIGHTBOX
+       ============================================================ -->
+  <div id="lightbox-modal" class="modal-scrim" role="dialog" aria-modal="true" aria-label="Pratinjau Foto">
+    <div class="modal-sheet">
+      <button id="btn-close-lightbox" class="modal-sheet-close" aria-label="Tutup">✕</button>
+      <img id="lightbox-img" src="" alt="Pratinjau Foto Kelas 9B" style="width:100%; max-height:55vh; object-fit:contain; border-radius:10px; border:1px solid rgba(0,240,255,0.25); margin-bottom:10px;">
+      <h3 id="lightbox-title" style="font-family:var(--font-heading); font-size:0.95rem; color:#fff; margin-bottom:4px;">Judul</h3>
+      <p id="lightbox-desc" style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;">Deskripsi foto.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 2: QUICK FACT MODAL
+       ============================================================ -->
+  <div id="quickfact-modal" class="modal-scrim" role="dialog" aria-modal="true" aria-label="Fakta AI">
+    <div class="modal-sheet">
+      <button id="btn-close-quickfact" class="modal-sheet-close" aria-label="Tutup">✕</button>
+      <div class="micro-pill cyan">DID YOU KNOW?</div>
+      <h3 id="fact-headline" style="font-family:var(--font-cyber); font-size:0.95rem; color:var(--cyan-neon); margin-bottom:6px;">Fakta Cerdas AI</h3>
+      <p id="fact-body-text" style="font-size:0.8rem; color:#cbd5e1; line-height:1.5; margin-bottom:14px;">
+        AI generatif dilatih dengan miliaran data internet, namun tidak memiliki kesadaran emosional sejati.
+      </p>
+      <button id="btn-next-fact" class="btn-cyber btn-cyber-outline" style="font-size:0.75rem;">
+        FAKTA BERIKUTNYA ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 3: COMPLETION SCREEN MODAL
+       ============================================================ -->
+  <div id="completion-modal" class="modal-scrim" role="dialog" aria-modal="true" aria-label="Sertifikat">
+    <div class="modal-sheet" style="text-align:center;">
+      <button id="btn-close-completion" class="modal-sheet-close" aria-label="Tutup">✕</button>
+      <div style="font-size:2.2rem; margin-bottom:6px;">🏆</div>
+      <div class="micro-pill emerald">SERTIFIKAT EKSPLORASI DIGITAL</div>
+      <h3 style="font-family:var(--font-cyber); font-size:1.05rem; color:#fff; margin-bottom:4px;">SELAMAT, KELAS 9B!</h3>
+      <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:14px;">Yayasan Vidatra SMP YPVDP Bontang</p>
+
+      <div style="background:rgba(2,5,14,0.8); border:1px solid rgba(0,240,255,0.25); border-radius:10px; padding:10px; text-align:left; font-size:0.75rem; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <span style="color:var(--text-muted);">Bab Terselesaikan:</span>
+          <span style="color:var(--cyan-neon); font-weight:700;">7 / 7 SELESAI</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <span style="color:var(--text-muted);">AI-Knowledge Score:</span>
+          <span id="final-iq-val" style="color:#facc15; font-weight:700;">100% (EXCELLENT)</span>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:var(--text-muted);">Integritas & Etika:</span>
+          <span style="color:#34d399; font-weight:700;">TERVERIFIKASI</span>
+        </div>
+      </div>
+
+      <button id="btn-back-to-start" class="btn-cyber btn-cyber-primary" style="font-size:0.78rem;">
+        EKSPLORASI DARI AWAL
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/cyber_3d.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
